@@ -1,14 +1,16 @@
 let matieresData = {};
 
-fetch('data.json')
-  .then(response => response.json())
-  .then(data => {
-    matieresData = data;
-    generateChoixForm(5);
-  })
-  .catch(error => {
-    document.body.innerHTML = "<p style='color:red;'>Erreur de chargement des données : " + error.message + "</p>";
-  });
+document.addEventListener("DOMContentLoaded", function() {
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      matieresData = data;
+      generateChoixForm(5);
+    })
+    .catch(error => {
+      document.body.innerHTML = "<p style='color:red;'>Erreur de chargement des données : " + error.message + "</p>";
+    });
+});
 
 function generateChoixForm(nbChoix) {
   const container = document.getElementById("choix-container");
@@ -46,13 +48,14 @@ function initDropdown(index) {
   const mat = document.getElementById(`matiere${index}`);
   const natureDiv = document.getElementById(`nature${index}`);
 
+  // Remplir spécialités
   for (const spec in matieresData) {
     sp.innerHTML += `<option value="${spec}">${spec}</option>`;
   }
 
   sp.onchange = () => {
     sem.innerHTML = '<option value="">-- Choisir un semestre --</option>';
-    mat.innerHTML = '';
+    mat.innerHTML = '<option value="">-- Choisir une matière --</option>';
     natureDiv.innerHTML = '';
     const selectedSp = sp.value;
     if (matieresData[selectedSp]) {
@@ -91,5 +94,6 @@ function initDropdown(index) {
     }
   };
 }
+
 
 
