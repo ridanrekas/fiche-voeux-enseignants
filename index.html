@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Fiche de Vœux – Électronique</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>📝 Fiche de vœux des enseignants – Département d'Électronique (2025-2026)</h2>
+  <p><strong>Instructions :</strong><br>
+    Veuillez remplir vos choix de matières à enseigner pour l'année 2025-2026 (semestres impairs uniquement).<br>
+    Les 3 premiers choix sont <strong>obligatoires</strong>, les 2 derniers sont <strong>facultatifs</strong>.<br>
+    Pour chaque choix, sélectionnez la spécialité, le semestre, la matière, et les types d’enseignement (Cours, TD, TP).
+  </p>
+
+  <form id="voeuxForm">
+    <fieldset>
+      <legend>👤 Informations personnelles</legend>
+      <label>Nom et prénom : <input name="nomPrenom" required></label><br><br>
+      <label>Email universitaire : <input name="email" type="email" required style="width: 300px;"></label>
+    </fieldset>
+
+    <div id="choixContainer"></div>
+
+    <br>
+    <button type="submit">✅ Envoyer mes vœux</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
