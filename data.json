@@ -174,111 +174,117 @@
         "tp": false
       }
     ]
-  },
-
-  "Informatique + Automatique": {
-    "S1": [
-      {"matiere": "Analyse 1", "cours": true, "td": true, "tp": false},
-      {"matiere": "Algèbre 1", "cours": true, "td": true, "tp": false},
-      {"matiere": "Algorithmique et structures de données 1", "cours": true, "td": true, "tp": false},
-      {"matiere": "Structure machine 1", "cours": true, "td": true, "tp": false},
-      {"matiere": "Physique 1", "cours": true, "td": true, "tp": false},
-      {"matiere": "Chimie 1", "cours": true, "td": true, "tp": false},
-      {"matiere": "TP Algorithmique et structures de données 1", "cours": false, "td": false, "tp": true},
-      {"matiere": "TP Physique 1", "cours": false, "td": false, "tp": true},
-      {"matiere": "TP Chimie 1", "cours": false, "td": false, "tp": true},
-      {"matiere": "Management de projet 1", "cours": true, "td": false, "tp": false},
-      {"matiere": "Introduction au développement Web", "cours": true, "td": false, "tp": false},
-      {"matiere": "Technical English 1", "cours": true, "td": false, "tp": false},
-      {"matiere": "Communication professionnelle", "cours": true, "td": false, "tp": false}
-    ],
-    "S3": [
-      {"matiere": "Fichiers et structures de données", "cours": true, "td": true, "tp": false},
-      {"matiere": "Algorithmique et structures de données 3", "cours": true, "td": true, "tp": false},
-      {"matiere": "Systèmes d’information", "cours": true, "td": true, "tp": false},
-      {"matiere": "Théorie des graphes", "cours": true, "td": true, "tp": false},
-      {"matiere": "Théorie du signal", "cours": true, "td": true, "tp": false},
-      {"matiere": "Electricité 1", "cours": true, "td": true, "tp": false},
-      {"matiere": "Electronique générale 1", "cours": true, "td": true, "tp": false},
-      {"matiere": "Programmation 3", "cours": true, "td": false, "tp": true},
-      {"matiere": "TP Electronique générale 1", "cours": false, "td": false, "tp": true},
-      {"matiere": "Méthodes numériques", "cours": true, "td": false, "tp": true},
-      {"matiere": "Systèmes automatisés industriels", "cours": true, "td": false, "tp": false},
-      {"matiere": "English for Technical Communication 1", "cours": true, "td": false, "tp": false}
-    ],
-    "S5": [
-      {"matiere": "Analyse de données", "cours": true, "td": true, "tp": true},
-      {"matiere": "Système d’aide à la décision", "cours": true, "td": false, "tp": true},
-      {"matiere": "Méthodes de développement DevOps, CI/CD", "cours": true, "td": true, "tp": true},
-      {"matiere": "Sécurité informatique", "cours": true, "td": true, "tp": true},
-      {"matiere": "Systèmes asservis 2", "cours": true, "td": true, "tp": false},
-      {"matiere": "Électronique de Puissance", "cours": true, "td": true, "tp": true},
-      {"matiere": "Capteurs et Instrumentation Industriels", "cours": true, "td": true, "tp": true},
-      {"matiere": "Administration des bases de données", "cours": true, "td": true, "tp": false},
-      {"matiere": "Programmation Mobile et IoT", "cours": true, "td": true, "tp": false},
-      {"matiere": "Calculateur Embarqué I", "cours": true, "td": true, "tp": true},
-      {"matiere": "Automates Programmables Industriels I", "cours": true, "td": true, "tp": true},
-      {"matiere": "Machines Électriques et Entrainement", "cours": true, "td": false, "tp": true},
-      {"matiere": "Robotique", "cours": true, "td": false, "tp": false},
-      {"matiere": "Management de l’innovation", "cours": true, "td": false, "tp": false}
-    ]
-  },
-  "RSI": {
-    "S5": [
-      {"matiere": "Systèmes Asservis Linéaires Continus", "cours": true, "td": true, "tp": true},
-      {"matiere": "Logique combinatoire et séquentielle", "cours": true, "td": true, "tp": true},
-      {"matiere": "Modélisation des robots", "cours": true, "td": false, "tp": true},
-      {"matiere": "Capteurs et Instrumentation pour la robotique", "cours": true, "td": false, "tp": true},
-      {"matiere": "Actionneurs pour la robotique", "cours": true, "td": true, "tp": true},
-      {"matiere": "Electronique appliquée", "cours": true, "td": false, "tp": true},
-      {"matiere": "Programmation orientée objet des systèmes embarqués en C", "cours": false, "td": false, "tp": true},
-      {"matiere": "Programmation Objet Python appliquée", "cours": false, "td": false, "tp": true},
-      {"matiere": "Anglais technique en automatique", "cours": true, "td": false, "tp": false}
-    ],
-    "S7": [
-      {"matiere": "Commande des systèmes linéaires multivariables", "cours": true, "td": true, "tp": true},
-      {"matiere": "Traitement du signal avancé", "cours": true, "td": true, "tp": true},
-      {"matiere": "Automates programmables industriels et supervision", "cours": true, "td": true, "tp": true},
-      {"matiere": "Techniques d’intelligence artificielle", "cours": true, "td": true, "tp": true},
-      {"matiere": "Techniques d’optimisation", "cours": true, "td": true, "tp": true},
-      {"matiere": "Structure robotique et modélisation à éléments finis", "cours": true, "td": false, "tp": true},
-      {"matiere": "Interfaces haptiques", "cours": true, "td": false, "tp": false},
-      {"matiere": "Projet Personnel Professionnel", "cours": false, "td": false, "tp": true},
-      {"matiere": "Normes et installation électrique", "cours": true, "td": false, "tp": false}
-    ]
-  },
-  "L3 Automatique": {
-    "S5": [
-      {"matiere": "Commande des systèmes linéaires", "cours": true, "td": true, "tp": false},
-      {"matiere": "Électronique de puissance", "cours": true, "td": true, "tp": false},
-      {"matiere": "Modélisation et identification des systèmes", "cours": true, "td": false, "tp": false},
-      {"matiere": "Microprocesseurs et microcontrôleurs", "cours": true, "td": true, "tp": false},
-      {"matiere": "Programmation en C++", "cours": true, "td": false, "tp": false},
-      {"matiere": "TP Commande des systèmes linéaires", "cours": false, "td": false, "tp": true},
-      {"matiere": "TP Électronique de puissance", "cours": false, "td": false, "tp": true},
-      {"matiere": "TP Modélisation et identification des systèmes", "cours": false, "td": false, "tp": true},
-      {"matiere": "TP Microprocesseurs et microcontrôleurs", "cours": false, "td": false, "tp": true},
-      {"matiere": "TP Programmation en C++", "cours": false, "td": false, "tp": true},
-      {"matiere": "Normes et certification", "cours": true, "td": false, "tp": false},
-      {"matiere": "Énergies renouvelables", "cours": true, "td": false, "tp": false},
-      {"matiere": "Anglais en automatique", "cours": true, "td": false, "tp": false}
-    ]
-  },
-  "L3 Électronique": {
-    "S5": [
-      {"matiere": "Systèmes à microprocesseurs", "cours": true, "td": true, "tp": false},
-      {"matiere": "Fonctions de l’électronique", "cours": true, "td": true, "tp": false},
-      {"matiere": "Traitement du signal", "cours": true, "td": true, "tp": false},
-      {"matiere": "Réseaux informatiques locaux", "cours": true, "td": true, "tp": false},
-      {"matiere": "TP Systèmes à microprocesseurs", "cours": false, "td": false, "tp": true},
-      {"matiere": "TP Fonctions de l’électronique", "cours": false, "td": false, "tp": true},
-      {"matiere": "TP Signal et réseaux locaux", "cours": false, "td": false, "tp": true},
-      {"matiere": "Travaux avant-projet", "cours": true, "td": false, "tp": true},
-      {"matiere": "Technologie des composants électroniques 2", "cours": true, "td": false, "tp": false},
-      {"matiere": "Technologie et fabrication des circuits intégrés", "cours": true, "td": false, "tp": false},
-      {"matiere": "Propagation d’ondes et antennes", "cours": true, "td": false, "tp": false}
-    ]
-  },
+  }
+}
+,
+"Informatique + Automatique": {
+  "S1": [
+    {"matiere": "Analyse 1", "cours": true, "td": true, "tp": false},
+    {"matiere": "Algèbre 1", "cours": true, "td": true, "tp": false},
+    {"matiere": "Algorithmique et structures de données 1", "cours": true, "td": true, "tp": false},
+    {"matiere": "Structure machine 1", "cours": true, "td": true, "tp": false},
+    {"matiere": "Physique 1", "cours": true, "td": true, "tp": false},
+    {"matiere": "Chimie 1", "cours": true, "td": true, "tp": false},
+    {"matiere": "TP Algorithmique et structures de données 1", "cours": false, "td": false, "tp": true},
+    {"matiere": "TP Physique 1", "cours": false, "td": false, "tp": true},
+    {"matiere": "TP Chimie 1", "cours": false, "td": false, "tp": true},
+    {"matiere": "Management de projet 1", "cours": true, "td": false, "tp": false},
+    {"matiere": "Introduction au développement Web", "cours": true, "td": false, "tp": false},
+    {"matiere": "Technical English 1", "cours": true, "td": false, "tp": false},
+    {"matiere": "Communication professionnelle", "cours": true, "td": false, "tp": false}
+  ],
+  "S3": [
+    {"matiere": "Fichiers et structures de données", "cours": true, "td": true, "tp": false},
+    {"matiere": "Algorithmique et structures de données 3", "cours": true, "td": true, "tp": false},
+    {"matiere": "Systèmes d’information", "cours": true, "td": true, "tp": false},
+    {"matiere": "Théorie des graphes", "cours": true, "td": true, "tp": false},
+    {"matiere": "Théorie du signal", "cours": true, "td": true, "tp": false},
+    {"matiere": "Electricité 1", "cours": true, "td": true, "tp": false},
+    {"matiere": "Electronique générale 1", "cours": true, "td": true, "tp": false},
+    {"matiere": "Programmation 3", "cours": true, "td": false, "tp": true},
+    {"matiere": "TP Electronique générale 1", "cours": false, "td": false, "tp": true},
+    {"matiere": "Méthodes numériques", "cours": true, "td": false, "tp": true},
+    {"matiere": "Systèmes automatisés industriels", "cours": true, "td": false, "tp": false},
+    {"matiere": "English for Technical Communication 1", "cours": true, "td": false, "tp": false}
+  ],
+  "S5": [
+    {"matiere": "Analyse de données", "cours": true, "td": true, "tp": true},
+    {"matiere": "Système d’aide à la décision", "cours": true, "td": false, "tp": true},
+    {"matiere": "Méthodes de développement DevOps, CI/CD", "cours": true, "td": true, "tp": true},
+    {"matiere": "Sécurité informatique", "cours": true, "td": true, "tp": true},
+    {"matiere": "Systèmes asservis 2", "cours": true, "td": true, "tp": false},
+    {"matiere": "Électronique de Puissance", "cours": true, "td": true, "tp": true},
+    {"matiere": "Capteurs et Instrumentation Industriels", "cours": true, "td": true, "tp": true},
+    {"matiere": "Administration des bases de données", "cours": true, "td": true, "tp": false},
+    {"matiere": "Programmation Mobile et IoT", "cours": true, "td": true, "tp": false},
+    {"matiere": "Calculateur Embarqué I", "cours": true, "td": true, "tp": true},
+    {"matiere": "Automates Programmables Industriels I", "cours": true, "td": true, "tp": true},
+    {"matiere": "Machines Électriques et Entrainement", "cours": true, "td": false, "tp": true},
+    {"matiere": "Robotique", "cours": true, "td": false, "tp": false},
+    {"matiere": "Management de l’innovation", "cours": true, "td": false, "tp": false}
+  ]
+}
+,
+"RSI": {
+  "S5": [
+    {"matiere": "Systèmes Asservis Linéaires Continus", "cours": true, "td": true, "tp": true},
+    {"matiere": "Logique combinatoire et séquentielle", "cours": true, "td": true, "tp": true},
+    {"matiere": "Modélisation des robots", "cours": true, "td": false, "tp": true},
+    {"matiere": "Capteurs et Instrumentation pour la robotique", "cours": true, "td": false, "tp": true},
+    {"matiere": "Actionneurs pour la robotique", "cours": true, "td": true, "tp": true},
+    {"matiere": "Electronique appliquée", "cours": true, "td": false, "tp": true},
+    {"matiere": "Programmation orientée objet des systèmes embarqués en C", "cours": false, "td": false, "tp": true},
+    {"matiere": "Programmation Objet Python appliquée", "cours": false, "td": false, "tp": true},
+    {"matiere": "Anglais technique en automatique", "cours": true, "td": false, "tp": false}
+  ],
+  "S7": [
+    {"matiere": "Commande des systèmes linéaires multivariables", "cours": true, "td": true, "tp": true},
+    {"matiere": "Traitement du signal avancé", "cours": true, "td": true, "tp": true},
+    {"matiere": "Automates programmables industriels et supervision", "cours": true, "td": true, "tp": true},
+    {"matiere": "Techniques d’intelligence artificielle", "cours": true, "td": true, "tp": true},
+    {"matiere": "Techniques d’optimisation", "cours": true, "td": true, "tp": true},
+    {"matiere": "Structure robotique et modélisation à éléments finis", "cours": true, "td": false, "tp": true},
+    {"matiere": "Interfaces haptiques", "cours": true, "td": false, "tp": false},
+    {"matiere": "Projet Personnel Professionnel", "cours": false, "td": false, "tp": true},
+    {"matiere": "Normes et installation électrique", "cours": true, "td": false, "tp": false}
+  ]
+}
+,
+"L3 Automatique": {
+  "S5": [
+    {"matiere": "Commande des systèmes linéaires", "cours": true, "td": true, "tp": false},
+    {"matiere": "Électronique de puissance", "cours": true, "td": true, "tp": false},
+    {"matiere": "Modélisation et identification des systèmes", "cours": true, "td": false, "tp": false},
+    {"matiere": "Microprocesseurs et microcontrôleurs", "cours": true, "td": true, "tp": false},
+    {"matiere": "Programmation en C++", "cours": true, "td": false, "tp": false},
+    {"matiere": "TP Commande des systèmes linéaires", "cours": false, "td": false, "tp": true},
+    {"matiere": "TP Électronique de puissance", "cours": false, "td": false, "tp": true},
+    {"matiere": "TP Modélisation et identification des systèmes", "cours": false, "td": false, "tp": true},
+    {"matiere": "TP Microprocesseurs et microcontrôleurs", "cours": false, "td": false, "tp": true},
+    {"matiere": "TP Programmation en C++", "cours": false, "td": false, "tp": true},
+    {"matiere": "Normes et certification", "cours": true, "td": false, "tp": false},
+    {"matiere": "Énergies renouvelables", "cours": true, "td": false, "tp": false},
+    {"matiere": "Anglais en automatique", "cours": true, "td": false, "tp": false}
+  ]
+}
+,
+"L3 Électronique": {
+  "S5": [
+    {"matiere": "Systèmes à microprocesseurs", "cours": true, "td": true, "tp": false},
+    {"matiere": "Fonctions de l’électronique", "cours": true, "td": true, "tp": false},
+    {"matiere": "Traitement du signal", "cours": true, "td": true, "tp": false},
+    {"matiere": "Réseaux informatiques locaux", "cours": true, "td": true, "tp": false},
+    {"matiere": "TP Systèmes à microprocesseurs", "cours": false, "td": false, "tp": true},
+    {"matiere": "TP Fonctions de l’électronique", "cours": false, "td": false, "tp": true},
+    {"matiere": "TP Signal et réseaux locaux", "cours": false, "td": false, "tp": true},
+    {"matiere": "Travaux avant-projet", "cours": true, "td": false, "tp": true},
+    {"matiere": "Technologie des composants électroniques 2", "cours": true, "td": false, "tp": false},
+    {"matiere": "Technologie et fabrication des circuits intégrés", "cours": true, "td": false, "tp": false},
+    {"matiere": "Propagation d’ondes et antennes", "cours": true, "td": false, "tp": false}
+  ]
+}
+,
+{
   "L3 Télécommunications": {
     "S5": [
       {"matiere": "Communications analogiques", "cours": true, "td": true, "tp": false},
@@ -412,4 +418,5 @@
     ]
   }
 }
+
 
