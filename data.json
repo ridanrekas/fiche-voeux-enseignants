@@ -1,13 +1,13 @@
 {
-  "Automatique L3": {
+  "L3 Automatique": {
     "S5": [
-      { "matiere": "Optimisation", "cours": true, "td": true, "tp": false },
-      { "matiere": "Régulation industrielle", "cours": true, "td": true, "tp": true }
+      { "matiere": "Automatique 1", "cours": true, "td": true, "tp": false },
+      { "matiere": "Capteurs", "cours": true, "td": false, "tp": true }
     ]
   },
   "RSI": {
     "S3": [
-      { "matiere": "Systèmes logiques", "cours": true, "td": false, "tp": true }
+      { "matiere": "Communication", "cours": true, "td": true, "tp": true }
     ]
   }
 }
