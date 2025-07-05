@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fiche de vœux - Département Électronique</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fiche de Vœux Enseignants</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>📝 Fiche de vœux des enseignants – Département d'Électronique (2025-2026)</h1>
+  <h2>📝 Fiche de vœux des enseignants – Département d'Électronique (2025-2026)</h2>
   <p><strong>Instructions :</strong><br>
-    Merci de remplir vos choix de matières à enseigner pour l’année 2025-2026 (semestres impairs uniquement).<br>
-    Les 3 premiers choix sont <strong>obligatoires</strong>, les 2 suivants sont <strong>facultatifs</strong>.
+    Veuillez remplir vos choix de matières à enseigner pour l'année 2025-2026 (semestres impairs uniquement).<br>
+    Les 3 premiers choix sont <strong>obligatoires</strong>, les 2 derniers sont <strong>facultatifs</strong>.<br>
+    Pour chaque choix, sélectionnez la spécialité, le semestre, la matière, et les types d’enseignement (Cours, TD, TP).
   </p>
 
   <form id="voeuxForm">
     <fieldset>
       <legend>👤 Informations personnelles</legend>
-      <label>Nom et prénom : <input name="nomPrenom" required></label><br><br>
-      <label>Email universitaire : <input name="email" type="email" pattern=".+@univ-annaba\.dz" required></label>
+      <label>Nom et prénom :
+        <input name="nomPrenom" required>
+      </label><br><br>
+      <label>Email universitaire :
+        <input name="email" type="email" required pattern=".+@univ-annaba\.dz">
+      </label>
     </fieldset>
 
-    <hr>
+    <div id="choix-container"></div>
 
-    <div id="choixContainer"></div>
-
-    <br>
     <button type="submit">✅ Envoyer mes vœux</button>
   </form>
-
-  <div id="resultMessage"></div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
