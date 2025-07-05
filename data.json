@@ -1,0 +1,13 @@
+{
+  "Automatique L3": {
+    "S5": [
+      { "matiere": "Optimisation", "cours": true, "td": true, "tp": false },
+      { "matiere": "Régulation industrielle", "cours": true, "td": true, "tp": true }
+    ]
+  },
+  "RSI": {
+    "S3": [
+      { "matiere": "Systèmes logiques", "cours": true, "td": false, "tp": true }
+    ]
+  }
+}
