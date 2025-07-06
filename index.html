@@ -18,11 +18,11 @@
     <fieldset>
       <legend>👤 Informations personnelles</legend>
       <label>Nom et prénom :
-  <input name="nomPrenom" id="nomPrenom" required>
-</label><br><br>
-<label>Email universitaire :
-  <input name="email" id="email" type="email" required pattern=".+@univ-annaba\.dz">
-</label>
+        <input name="nomPrenom" id="nomPrenom" required>
+      </label><br><br>
+      <label>Email universitaire :
+        <input name="email" id="email" type="email" required pattern=".+@univ-annaba\.dz">
+      </label>
     </fieldset>
 
     <div id="choix-container"></div>
@@ -32,5 +32,50 @@
   </form>
 
   <script src="script.js"></script>
+
+  <!-- SCRIPT POUR ENVOYER VERS GOOGLE APPS SCRIPT -->
+  <script>
+    document.getElementById("voeuxForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      // Construire les données sous forme d'objet
+      const data = {};
+      formData.forEach((value, key) => {
+        if (!data[key]) {
+          data[key] = value;
+        } else {
+          if (!Array.isArray(data[key])) {
+            data[key] = [data[key]];
+          }
+          data[key].push(value);
+        }
+      });
+
+      // 🔁 Remplace bien ce lien par TON URL DE DÉPLOIEMENT GOOGLE APPS SCRIPT
+      const scriptURL = 'https://script.google.com/a/macros/univ-annaba.dz/s/AKfycbwcLiJIqUGwhY5MSKWq6J7GZMaQk5VPtCO9gUJxeroZBbkRzZWP0BqqcxBzOT_ooHPr/exec';
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          document.getElementById("confirmationMessage").textContent = "✅ Vœux envoyés avec succès !";
+          form.reset();
+        } else {
+          throw new Error("Erreur lors de l'envoi des données.");
+        }
+      })
+      .catch(error => {
+        document.getElementById("confirmationMessage").textContent = "❌ Erreur d’envoi : " + error.message;
+      });
+    });
+  </script>
 </body>
 </html>
