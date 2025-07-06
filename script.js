@@ -91,6 +91,44 @@ function initDropdown(index) {
     }
   };
 }
+document.getElementById("voeuxForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = {};
+  formData.forEach((value, key) => {
+    if (!data[key]) {
+      data[key] = value;
+    } else {
+      // gérer les cases à cocher
+      if (!Array.isArray(data[key])) {
+        data[key] = [data[key]];
+      }
+      data[key].push(value);
+    }
+  });
+
+  fetch("https://script.google.com/a/macros/univ-annaba.dz/s/AKfycbwcLiJIqUGwhY5MSKWq6J7GZMaQk5VPtCO9gUJxeroZBbkRzZWP0BqqcxBzOT_ooHPr/exec", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        document.getElementById("confirmationMessage").textContent =
+          "✅ Vœux envoyés avec succès !";
+      } else {
+        throw new Error("Erreur lors de l'envoi.");
+      }
+    })
+    .catch((error) => {
+      document.getElementById("confirmationMessage").textContent =
+        "❌ Une erreur est survenue : " + error.message;
+      document.getElementById("confirmationMessage").style.color = "red";
+    });
+});
 
 
 
