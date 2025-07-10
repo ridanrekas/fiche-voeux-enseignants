@@ -34,55 +34,31 @@
     <p id="confirmationMessage" style="color: green;"></p>
   </form>
 
+  <script src="script.js"></script>
+
   <script>
-    // Générer dynamiquement 5 choix
-    const container = document.getElementById("choix-container");
-
-    for (let i = 1; i <= 5; i++) {
-      const obligatoire = i <= 3;
-      const bloc = document.createElement("fieldset");
-      bloc.innerHTML = `
-        <legend>Choix ${i} ${obligatoire ? "(obligatoire)" : "(facultatif)"}</legend>
-        <label>Spécialité :
-          <input name="specialite_${i}" required=${obligatoire}>
-        </label><br>
-        <label>Semestre :
-          <input name="semestre_${i}" required=${obligatoire}>
-        </label><br>
-        <label>Matière :
-          <input name="matiere_${i}" required=${obligatoire}>
-        </label><br>
-        <label><input type="checkbox" name="types_${i}" value="Cours"> Cours</label>
-        <label><input type="checkbox" name="types_${i}" value="TD"> TD</label>
-        <label><input type="checkbox" name="types_${i}" value="TP"> TP</label>
-      `;
-      container.appendChild(bloc);
-    }
-
-    // Envoi vers Apps Script
     document.getElementById("voeuxForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const form = e.target;
-      const nom = document.getElementById("nom").value.trim();
-      const prenom = document.getElementById("prenom").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const voeux = [];
+      const data = {
+        nom: form.nom.value.trim(),
+        prenom: form.prenom.value.trim(),
+        email: form.email.value.trim(),
+        voeux: []
+      };
 
-      for (let i = 1; i <= 5; i++) {
-        const specialite = form[`specialite_${i}`].value.trim();
-        const semestre = form[`semestre_${i}`].value.trim();
-        const matiere = form[`matiere_${i}`].value.trim();
-        const types = Array.from(form.querySelectorAll(`input[name="types_${i}"]:checked`)).map(cb => cb.value);
-
+      const choixDivs = document.querySelectorAll(".choix-block");
+      choixDivs.forEach(div => {
+        const specialite = div.querySelector(".specialite").value;
+        const semestre = div.querySelector(".semestre").value;
+        const matiere = div.querySelector(".matiere").value;
+        const types = Array.from(div.querySelectorAll(".type:checked")).map(cb => cb.value);
         if (specialite && semestre && matiere) {
-          voeux.push({ specialite, semestre, matiere, types });
+          data.voeux.push({ specialite, semestre, matiere, types });
         }
-      }
+      });
 
-      const data = { nom, prenom, email, voeux };
-
-      // Ton vrai lien Apps Script
       const scriptURL = 'https://script.google.com/macros/s/AKfycbwJp_ZAYKfPc_DTqzIk2HuPTa8X4kIKd5QfWtGpSJBHxrcY1mtrzU4yTAQ1dvmI12Vn/exec';
 
       fetch(scriptURL, {
@@ -93,7 +69,7 @@
         }
       })
       .then(response => response.text())
-      .then(responseText => {
+      .then(text => {
         document.getElementById("confirmationMessage").textContent = "✅ Vœux envoyés avec succès !";
         form.reset();
       })
@@ -104,3 +80,4 @@
   </script>
 </body>
 </html>
+
