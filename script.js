@@ -108,7 +108,7 @@ document.getElementById("voeuxForm").addEventListener("submit", function (e) {
     }
   });
 
-  fetch("https://script.google.com/a/macros/univ-annaba.dz/s/AKfycbwcLiJIqUGwhY5MSKWq6J7GZMaQk5VPtCO9gUJxeroZBbkRzZWP0BqqcxBzOT_ooHPr/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbwJp_ZAYKfPc_DTqzIk2HuPTa8X4kIKd5QfWtGpSJBHxrcY1mtrzU4yTAQ1dvmI12Vn/exec", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
