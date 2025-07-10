@@ -2,52 +2,20 @@ document.addEventListener("DOMContentLoaded", function() {
   fetch('data.json')
     .then(response => response.json())
     .then(data => {
-      window.matieresData = data; // variable globale accessible partout
-      generateChoixForm(5);
+      window.matieresData = data;
+      initDropdown();
     })
     .catch(error => {
       document.body.innerHTML = "<p style='color:red;'>Erreur de chargement des données : " + error.message + "</p>";
     });
 });
 
-function generateChoixForm(nbChoix) {
-  const container = document.getElementById("choix-container");
-  container.innerHTML = ''; // vide au cas où
+function initDropdown() {
+  const sp = document.getElementById('specialite');
+  const sem = document.getElementById('semestre');
+  const mat = document.getElementById('matiere');
+  const natureDiv = document.getElementById('nature');
 
-  for (let i = 1; i <= nbChoix; i++) {
-    const obligatoire = i <= 3 ? ' (obligatoire)' : ' (facultatif)';
-    const fieldset = document.createElement("fieldset");
-    fieldset.innerHTML = `
-      <legend>📌 Choix ${i}${obligatoire}</legend>
-      <label>Spécialité :
-        <select id="specialite${i}" name="specialite${i}" ${i <= 3 ? "required" : ""}>
-          <option value="">-- Choisir une spécialité --</option>
-        </select>
-      </label><br><br>
-      <label>Semestre :
-        <select id="semestre${i}" name="semestre${i}" ${i <= 3 ? "required" : ""}>
-          <option value="">-- Choisir un semestre --</option>
-        </select>
-      </label><br><br>
-      <label>Matière :
-        <select id="matiere${i}" name="matiere${i}" ${i <= 3 ? "required" : ""}>
-          <option value="">-- Choisir une matière --</option>
-        </select>
-      </label><br><br>
-      <div id="nature${i}"></div>
-    `;
-    container.appendChild(fieldset);
-    initDropdown(i);
-  }
-}
-
-function initDropdown(index) {
-  const sp = document.getElementById(`specialite${index}`);
-  const sem = document.getElementById(`semestre${index}`);
-  const mat = document.getElementById(`matiere${index}`);
-  const natureDiv = document.getElementById(`nature${index}`);
-
-  // Remplir spécialités
   sp.innerHTML += Object.keys(window.matieresData).map(spec => `<option value="${spec}">${spec}</option>`).join('');
 
   sp.onchange = () => {
@@ -84,29 +52,45 @@ function initDropdown(index) {
     if (window.matieresData[selectedSp] && window.matieresData[selectedSp][selectedSem]) {
       const obj = window.matieresData[selectedSp][selectedSem].find(m => m.matiere === selectedMat);
       if (obj) {
-        if (obj.cours) natureDiv.innerHTML += `<label><input type="checkbox" name="nature${index}[]" value="Cours"> Cours</label><br>`;
-        if (obj.td) natureDiv.innerHTML += `<label><input type="checkbox" name="nature${index}[]" value="TD"> TD</label><br>`;
-        if (obj.tp) natureDiv.innerHTML += `<label><input type="checkbox" name="nature${index}[]" value="TP"> TP</label><br>`;
+        if (obj.cours) natureDiv.innerHTML += `<label><input type="checkbox" name="nature[]" value="Cours" required> Cours</label><br>`;
+        if (obj.td) natureDiv.innerHTML += `<label><input type="checkbox" name="nature[]" value="TD" required> TD</label><br>`;
+        if (obj.tp) natureDiv.innerHTML += `<label><input type="checkbox" name="nature[]" value="TP" required> TP</label><br>`;
       }
     }
   };
 }
+
 document.getElementById("voeuxForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
   const formData = new FormData(this);
-  const data = {};
-  formData.forEach((value, key) => {
-    if (!data[key]) {
-      data[key] = value;
-    } else {
-      // gérer les cases à cocher
-      if (!Array.isArray(data[key])) {
-        data[key] = [data[key]];
-      }
-      data[key].push(value);
-    }
-  });
+
+  // Découper nom et prénom (simple split)
+  const nomPrenom = formData.get("nomPrenom") || "";
+  const parts = nomPrenom.trim().split(" ");
+  const nom = parts.shift() || "";
+  const prenom = parts.join(" ") || "";
+
+  const email = formData.get("email") || "";
+
+  const specialite = formData.get("specialite");
+  const semestre = formData.get("semestre");
+  const matiere = formData.get("matiere");
+  const types = formData.getAll("nature[]") || [];
+
+  if (!specialite || !semestre || !matiere || types.length === 0) {
+    alert("Merci de bien remplir tous les champs du choix d'enseignement !");
+    return;
+  }
+
+  const data = {
+    nom,
+    prenom,
+    email,
+    voeux: [
+      { specialite, semestre, matiere, types }
+    ]
+  };
 
   fetch("https://script.google.com/macros/s/AKfycbwJp_ZAYKfPc_DTqzIk2HuPTa8X4kIKd5QfWtGpSJBHxrcY1mtrzU4yTAQ1dvmI12Vn/exec", {
     method: "POST",
@@ -115,20 +99,22 @@ document.getElementById("voeuxForm").addEventListener("submit", function (e) {
       "Content-Type": "application/json",
     },
   })
-    .then((response) => {
-      if (response.ok) {
-        document.getElementById("confirmationMessage").textContent =
-          "✅ Vœux envoyés avec succès !";
-      } else {
-        throw new Error("Erreur lors de l'envoi.");
-      }
-    })
-    .catch((error) => {
+  .then((response) => {
+    if (response.ok) {
       document.getElementById("confirmationMessage").textContent =
-        "❌ Une erreur est survenue : " + error.message;
-      document.getElementById("confirmationMessage").style.color = "red";
-    });
+        "✅ Vœu envoyé avec succès !";
+      this.reset();
+    } else {
+      throw new Error("Erreur lors de l'envoi.");
+    }
+  })
+  .catch((error) => {
+    document.getElementById("confirmationMessage").textContent =
+      "❌ Une erreur est survenue : " + error.message;
+    document.getElementById("confirmationMessage").style.color = "red";
+  });
 });
+
 
 
 
