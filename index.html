@@ -7,77 +7,78 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>📝 Fiche de vœux des enseignants – Département d'Électronique (2025-2026)</h2>
-  <p><strong>Instructions :</strong><br>
-    Veuillez remplir vos choix de matières à enseigner pour l'année 2025-2026 (semestres impairs uniquement).<br>
-    Les 3 premiers choix sont <strong>obligatoires</strong>, les 2 derniers sont <strong>facultatifs</strong>.<br>
-    Pour chaque choix, sélectionnez la spécialité, le semestre, la matière, et les types d’enseignement (Cours, TD, TP).
-  </p>
+  <h2>📝 Fiche de vœux – Département d'Électronique (2025-2026)</h2>
 
   <form id="voeuxForm">
     <fieldset>
       <legend>👤 Informations personnelles</legend>
-      <label>Nom :
-        <input name="nom" id="nom" required>
-      </label><br><br>
-      <label>Prénom :
-        <input name="prenom" id="prenom" required>
-      </label><br><br>
-      <label>Email universitaire :
-        <input name="email" id="email" type="email" required pattern=".+@univ-annaba\.dz">
+      <label>Nom : <input name="nom" required></label><br><br>
+      <label>Prénom : <input name="prenom" required></label><br><br>
+      <label>Email universitaire : 
+        <input name="email" type="email" required pattern=".+@univ-annaba\.dz">
       </label>
     </fieldset>
 
-    <div id="choix-container"></div>
+    <fieldset>
+      <legend>📚 Vœu 1</legend>
+      <label>Spécialité : <input name="voeux[0][specialite]" required></label><br>
+      <label>Semestre : <input name="voeux[0][semestre]" required></label><br>
+      <label>Matière : <input name="voeux[0][matiere]" required></label><br>
+      <label>Types : 
+        <label><input type="checkbox" name="voeux[0][types]" value="Cours"> Cours</label>
+        <label><input type="checkbox" name="voeux[0][types]" value="TD"> TD</label>
+        <label><input type="checkbox" name="voeux[0][types]" value="TP"> TP</label>
+      </label>
+    </fieldset>
 
-    <button type="submit">✅ Envoyer mes vœux</button>
+    <button type="submit">✅ Envoyer</button>
     <p id="confirmationMessage" style="color: green;"></p>
   </form>
 
-  <script src="script.js"></script>
-
   <script>
-    document.getElementById("voeuxForm").addEventListener("submit", function (e) {
+    document.getElementById("voeuxForm").addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const form = e.target;
+      const formData = new FormData(form);
+
       const data = {
-        nom: form.nom.value.trim(),
-        prenom: form.prenom.value.trim(),
-        email: form.email.value.trim(),
-        voeux: []
+        nom: formData.get("nom"),
+        prenom: formData.get("prenom"),
+        email: formData.get("email"),
+        voeux: [
+          {
+            specialite: formData.get("voeux[0][specialite]"),
+            semestre: formData.get("voeux[0][semestre]"),
+            matiere: formData.get("voeux[0][matiere]"),
+            types: formData.getAll("voeux[0][types]")
+          }
+        ]
       };
 
-      const choixDivs = document.querySelectorAll(".choix-block");
-      choixDivs.forEach(div => {
-        const specialite = div.querySelector(".specialite").value;
-        const semestre = div.querySelector(".semestre").value;
-        const matiere = div.querySelector(".matiere").value;
-        const types = Array.from(div.querySelectorAll(".type:checked")).map(cb => cb.value);
-        if (specialite && semestre && matiere) {
-          data.voeux.push({ specialite, semestre, matiere, types });
-        }
-      });
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwJp_ZAYKfPc_DTqzIk2HuPTa8X4kIKd5QfWtGpSJBHxrcY1mtrzU4yTAQ1dvmI12Vn/exec";
 
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbwJp_ZAYKfPc_DTqzIk2HuPTa8X4kIKd5QfWtGpSJBHxrcY1mtrzU4yTAQ1dvmI12Vn/exec';
+      try {
+        const response = await fetch(scriptURL, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
 
-      fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
+        if (response.ok) {
+          document.getElementById("confirmationMessage").textContent = "✅ Vœux envoyés avec succès !";
+          form.reset();
+        } else {
+          throw new Error("Erreur de réponse du serveur");
         }
-      })
-      .then(response => response.text())
-      .then(text => {
-        document.getElementById("confirmationMessage").textContent = "✅ Vœux envoyés avec succès !";
-        form.reset();
-      })
-      .catch(error => {
-        document.getElementById("confirmationMessage").textContent = "❌ Une erreur est survenue : " + error.message;
-      });
+      } catch (err) {
+        document.getElementById("confirmationMessage").textContent = "❌ Une erreur est survenue : " + err.message;
+      }
     });
   </script>
 </body>
 </html>
+
 
