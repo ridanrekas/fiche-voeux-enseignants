@@ -4,36 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fiche de Vœux Enseignants</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 2rem;
-      max-width: 900px;
-    }
-    fieldset {
-      border: 1px solid #ccc;
-      padding: 1rem;
-      margin-top: 1.5rem;
-    }
-    label {
-      display: block;
-      margin: 0.5rem 0;
-    }
-    select, input[type="text"], input[type="email"] {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.25rem;
-    }
-    .voeu {
-      margin-top: 1rem;
-      border-top: 1px dashed #aaa;
-      padding-top: 1rem;
-    }
-    .checkboxes label {
-      display: inline-block;
-      margin-right: 1rem;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h2>📝 Fiche de vœux des enseignants – Département d'Électronique (2025-2026)</h2>
@@ -46,9 +17,12 @@
   <form id="voeuxForm">
     <fieldset>
       <legend>👤 Informations personnelles</legend>
-      <label>Nom et prénom :
+      <label>Nom :
         <input name="nom" id="nom" required>
-      </label>
+      </label><br><br>
+      <label>Prénom :
+        <input name="prenom" id="prenom" required>
+      </label><br><br>
       <label>Email universitaire :
         <input name="email" id="email" type="email" required pattern=".+@univ-annaba\.dz">
       </label>
@@ -61,108 +35,55 @@
   </form>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwJp_ZAYKfPc_DTqzIk2HuPTa8X4kIKd5QfWtGpSJBHxrcY1mtrzU4yTAQ1dvmI12Vn/exec';
-    const nbVoeux = 5;
+    // Générer dynamiquement 5 choix
     const container = document.getElementById("choix-container");
-    let matieres = {};
 
-    fetch('data.json')
-      .then(response => response.json())
-      .then(json => {
-        matieres = json;
-        generateChoix();
-      })
-      .catch(error => {
-        container.innerHTML = `<p style="color:red;">Erreur de chargement des données : ${error.message}</p>`;
-      });
-
-    function generateChoix() {
-      for (let i = 0; i < nbVoeux; i++) {
-        const obligatoire = i < 3;
-        const voeuDiv = document.createElement("div");
-        voeuDiv.className = "voeu";
-        voeuDiv.innerHTML = `
-          <fieldset>
-            <legend>Choix ${i + 1} ${obligatoire ? '(obligatoire)' : '(facultatif)'}</legend>
-            <label>Spécialité :
-              <select name="specialite${i}" required="${obligatoire}">
-                <option value="">-- Choisir --</option>
-                ${Object.keys(matieres).map(spec => `<option value="${spec}">${spec}</option>`).join("")}
-              </select>
-            </label>
-            <label>Semestre :
-              <select name="semestre${i}" required="${obligatoire}" disabled></select>
-            </label>
-            <label>Matière :
-              <select name="matiere${i}" required="${obligatoire}" disabled></select>
-            </label>
-            <div class="checkboxes">
-              <label><input type="checkbox" name="type${i}" value="Cours"> Cours</label>
-              <label><input type="checkbox" name="type${i}" value="TD"> TD</label>
-              <label><input type="checkbox" name="type${i}" value="TP"> TP</label>
-            </div>
-          </fieldset>
-        `;
-        container.appendChild(voeuDiv);
-
-        const specSelect = voeuDiv.querySelector(`select[name="specialite${i}"]`);
-        const semSelect = voeuDiv.querySelector(`select[name="semestre${i}"]`);
-        const matSelect = voeuDiv.querySelector(`select[name="matiere${i}"]`);
-
-        specSelect.addEventListener("change", () => {
-          semSelect.innerHTML = `<option value="">-- Choisir --</option>`;
-          matSelect.innerHTML = `<option value="">-- Choisir --</option>`;
-          semSelect.disabled = true;
-          matSelect.disabled = true;
-
-          const spec = specSelect.value;
-          if (spec && matieres[spec]) {
-            Object.keys(matieres[spec]).forEach(sem => {
-              semSelect.innerHTML += `<option value="${sem}">${sem}</option>`;
-            });
-            semSelect.disabled = false;
-          }
-        });
-
-        semSelect.addEventListener("change", () => {
-          matSelect.innerHTML = `<option value="">-- Choisir --</option>`;
-          matSelect.disabled = true;
-          const spec = specSelect.value;
-          const sem = semSelect.value;
-          if (spec && sem && matieres[spec][sem]) {
-            Object.keys(matieres[spec][sem]).forEach(mat => {
-              matSelect.innerHTML += `<option value="${mat}">${mat}</option>`;
-            });
-            matSelect.disabled = false;
-          }
-        });
-      }
+    for (let i = 1; i <= 5; i++) {
+      const obligatoire = i <= 3;
+      const bloc = document.createElement("fieldset");
+      bloc.innerHTML = `
+        <legend>Choix ${i} ${obligatoire ? "(obligatoire)" : "(facultatif)"}</legend>
+        <label>Spécialité :
+          <input name="specialite_${i}" required=${obligatoire}>
+        </label><br>
+        <label>Semestre :
+          <input name="semestre_${i}" required=${obligatoire}>
+        </label><br>
+        <label>Matière :
+          <input name="matiere_${i}" required=${obligatoire}>
+        </label><br>
+        <label><input type="checkbox" name="types_${i}" value="Cours"> Cours</label>
+        <label><input type="checkbox" name="types_${i}" value="TD"> TD</label>
+        <label><input type="checkbox" name="types_${i}" value="TP"> TP</label>
+      `;
+      container.appendChild(bloc);
     }
 
+    // Envoi vers Apps Script
     document.getElementById("voeuxForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const data = {
-        nom: document.getElementById("nom").value,
-        email: document.getElementById("email").value,
-        voeux: []
-      };
+      const form = e.target;
+      const nom = document.getElementById("nom").value.trim();
+      const prenom = document.getElementById("prenom").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const voeux = [];
 
-      for (let i = 0; i < nbVoeux; i++) {
-        const spec = document.querySelector(`select[name="specialite${i}"]`).value;
-        const sem = document.querySelector(`select[name="semestre${i}"]`).value;
-        const mat = document.querySelector(`select[name="matiere${i}"]`).value;
-        const types = [...document.querySelectorAll(`input[name="type${i}"]:checked`)].map(c => c.value);
+      for (let i = 1; i <= 5; i++) {
+        const specialite = form[`specialite_${i}`].value.trim();
+        const semestre = form[`semestre_${i}`].value.trim();
+        const matiere = form[`matiere_${i}`].value.trim();
+        const types = Array.from(form.querySelectorAll(`input[name="types_${i}"]:checked`)).map(cb => cb.value);
 
-        if (spec && sem && mat && types.length > 0) {
-          data.voeux.push({
-            specialite: spec,
-            semestre: sem,
-            matiere: mat,
-            types: types
-          });
+        if (specialite && semestre && matiere) {
+          voeux.push({ specialite, semestre, matiere, types });
         }
       }
+
+      const data = { nom, prenom, email, voeux };
+
+      // Ton vrai lien Apps Script
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbwJp_ZAYKfPc_DTqzIk2HuPTa8X4kIKd5QfWtGpSJBHxrcY1mtrzU4yTAQ1dvmI12Vn/exec';
 
       fetch(scriptURL, {
         method: 'POST',
@@ -171,16 +92,13 @@
           'Content-Type': 'application/json'
         }
       })
-      .then(response => {
-        if (response.ok) {
-          document.getElementById("confirmationMessage").textContent = "✅ Vœux envoyés avec succès !";
-          e.target.reset();
-        } else {
-          throw new Error("Erreur lors de l'envoi.");
-        }
+      .then(response => response.text())
+      .then(responseText => {
+        document.getElementById("confirmationMessage").textContent = "✅ Vœux envoyés avec succès !";
+        form.reset();
       })
-      .catch(err => {
-        document.getElementById("confirmationMessage").textContent = "❌ Erreur : " + err.message;
+      .catch(error => {
+        document.getElementById("confirmationMessage").textContent = "❌ Une erreur est survenue : " + error.message;
       });
     });
   </script>
